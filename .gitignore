@@ -75,8 +75,11 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Jupyter runtime
+*.nbconvert.ipynb
 
 # IPython
 profile_default/
@@ -92,7 +95,7 @@ ipython_config.py
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
-#Pipfile.lock
+# Pipfile.lock
 
 # UV
 #   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
@@ -135,6 +138,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+P-*/          
 
 # Spyder project settings
 .spyderproject
@@ -173,4 +177,21 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-P-20250523/
+# VSCode settings
+# .vscode/
+
+# Data files
+# *.csv
+# *.xls
+# *.xlsx
+# *.zip
+# *.rar
+
+# Logs and output
+*.log
+*.out
+
+# OS files
+.DS_Store
+Thumbs.db
+

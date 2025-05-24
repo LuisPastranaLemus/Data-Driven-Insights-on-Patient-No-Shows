@@ -40,23 +40,23 @@ def load_dataset_from_zip(zip_path: str, filename: str, **kwargs) -> pd.DataFram
                 raise ValueError(f"Unsupported file extension '{ext}'. Only .csv, .xls and .xlsx are supported.")
     return df
 
-def load_dataset_from_csv(path, sep=',', encoding='utf-8', header='infer', keep_default_na=False):
+def load_dataset_from_csv(path, **kwargs):
     
     if not os.path.exists(path):
         raise FileNotFoundError(f"*** Error *** \nFile not found: {path}.")
         print("\nThis is your current", os.getcwd())
     
-    df = pd.read_csv(path, sep=sep, encoding=encoding, header=header, keep_default_na=keep_default_na)
+    df = pd.read_csv(path, **kwargs)
     
     return df
 
-def load_dataset_from_excel(path, sheet_name=0):
+def load_dataset_from_excel(path, **kwargs):
 
     if not os.path.exists(path):
         raise FileNotFoundError(f"*** Error *** \nFile not found: {path}.")
         print("\nThis is your current", os.getcwd())
 
-    df = pd.read_excel(path, sheet_name=sheet_name, header=0)
+    df = pd.read_excel(path, **kwargs)
     
     return df
 
