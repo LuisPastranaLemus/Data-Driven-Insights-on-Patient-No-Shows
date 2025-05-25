@@ -25,7 +25,8 @@ try:
                       plot_boxplots,
                       plot_histogram,
                       plot_frequency_density,
-                      plot_grouped_barplot)
+                      plot_grouped_barplot,
+                      plot_horizontal_bar)
     
     from .utils import(format_notebook)
                       
@@ -56,5 +57,6 @@ __all__ = ['load_dataset_from_zip',
            'plot_histogram',
            'plot_frequency_density',
            'plot_grouped_barplot',
+           'plot_horizontal_bar',
            
            'format_notebook']

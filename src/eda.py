@@ -149,3 +149,22 @@ def plot_grouped_barplot(df, x_col, y_col, hue_col=None, palette=['black', 'grey
 
     plt.tight_layout()
     plt.show()
+
+def plot_horizontal_bar(ds, colors=['black', 'grey'], xlabel='', ylabel='', title='', xticks_range=None, rotation=0):
+    
+    categories = ds.value_counts().index
+    values = ds.value_counts().values
+    
+    plt.figure(figsize=(15, 7))
+    sns.barplot(y=categories, x=values, hue=categories, dodge=False, palette=colors)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+    
+    if xticks_range is not None:
+        plt.xticks(np.arange(*xticks_range), rotation=rotation)
+        
+    plt.grid(True)
+    
+    plt.tight_layout()
+    plt.show()
