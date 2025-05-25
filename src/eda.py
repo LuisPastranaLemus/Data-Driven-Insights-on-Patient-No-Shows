@@ -22,7 +22,7 @@ def missing_values_heatmap(df):
 def plot_boxplots(ds_list, xlabels, ylabel, title, yticks_range=None, rotation=0, color='grey'):
   
     if len(ds_list) != len(xlabels):
-        raise ValueError("The data list and labels must be the same length.")
+        raise ValueError("*** Error ***   > The data list and labels must be the same length.")
     
     df = pd.DataFrame({'value': pd.concat(ds_list, ignore_index=True),
                        'group': sum([[label]*len(s) for label, s in zip(xlabels, ds_list)], [])})
@@ -33,18 +33,18 @@ def plot_boxplots(ds_list, xlabels, ylabel, title, yticks_range=None, rotation=0
     # If color is list, assign custom palette; if string, use solid color
     if isinstance(color, (list, tuple)) and len(color) == len(xlabels):
         palette = dict(zip(xlabels, color))
-        sns.boxplot(x='group', y='Value', data=df, palette=palette)
+        sns.boxplot(x='group', y='value', data=df, palette=palette)
     else:
-        sns.boxplot(x='group', y='Value', data=df, color=color)
+        sns.boxplot(x='group', y='value', data=df, color=color)
     
     plt.ylabel(ylabel)
     plt.title(title)
     plt.xticks(rotation=rotation)
     
     if yticks_range is not None:
-        plt.ylim(yticks_range)
+        plt.ylim(yticks_range[0], yticks_range[1])
     
-    plt.yticks(rotation=rotation)
+    plt.yticks(np.arange(*yticks_range), rotation=rotation)
     plt.grid(True)
     
     plt.tight_layout()
@@ -67,21 +67,21 @@ def plot_histogram(ds, bins=10, color='grey', title='', xlabel='', ylabel='Frequ
     sns.histplot(ds, bins=bins, edgecolor='black', color=color, kde=False)
 
     # Mean line
-    plt.axvline(mean_val, color='red', linestyle='+', linewidth=1.5, label=f'Mean: {mean_val:.2f}')
+    plt.axvline(mean_val, color='red', linestyle='dashed', linewidth=1.5, label=f'Mean: {mean_val:.2f}')
     # Median Line
-    plt.axvline(median_val, color='blue', linestyle='*', linewidth=1.5, label=f'Median: {median_val:.2f}')
+    plt.axvline(median_val, color='blue', linestyle='dashdot', linewidth=1.5, label=f'Median: {median_val:.2f}')
 
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
 
     if xticks_range is not None:
-        plt.xlim(xticks_range)
+        plt.xlim(xticks_range[0], xticks_range[1])
     if yticks_range is not None:
-        plt.ylim(yticks_range)
+        plt.ylim(yticks_range[0], yticks_range[1])
     
-    plt.xticks(rotation=rotation)
-    plt.yticks(rotation=rotation)
+    plt.xticks(np.arange(*xticks_range), rotation=rotation)
+    plt.yticks(np.arange(*yticks_range), rotation=rotation)
     plt.legend()
     plt.grid(True)
 
@@ -107,17 +107,17 @@ def plot_frequency_density(ds, bins=10, color='grey', title='', xlabel='', ylabe
         sns.kdeplot(ds, color='darkblue', linewidth=2, label='KDE')
 
     # Mean and Median lines
-    plt.axvline(mean_val, color='red', linestyle='+', linewidth=1.5, label=f'Mean: {mean_val:.2f}')
-    plt.axvline(median_val, color='blue', linestyle='*', linewidth=1.5, label=f'Median: {median_val:.2f}')
+    plt.axvline(mean_val, color='red', linestyle='dashed', linewidth=1.5, label=f'Mean: {mean_val:.2f}')
+    plt.axvline(median_val, color='blue', linestyle='dashdot', linewidth=1.5, label=f'Median: {median_val:.2f}')
 
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
 
     if xticks_range:
-        plt.xlim(xticks_range)
+        plt.xlim(xticks_range[0], xticks_range[1])
 
-    plt.xticks(rotation=rotation)
+    plt.xticks(np.arange(*xticks_range), rotation=rotation)
     plt.legend()
     plt.grid(True)
         

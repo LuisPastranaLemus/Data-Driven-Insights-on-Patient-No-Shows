@@ -12,15 +12,22 @@ try:
     
     from .data_cleaning import (check_existing_missing_values,
                                 replace_missing_values,
-                                normalize_string_format,
+                                normalize_df_string_format,
+                                normalize_headers_string_format,
                                 detect_implicit_duplicates,
-                                replace_string_values_datetime)
+                                replace_string_values_datetime,
+                                find_errors_to_numeric,
+                                convert_ndtype_to_numeric,
+                                convert_integer_to_boolean,
+                                standardize_gender_values)
     
     from .eda import (missing_values_heatmap,
                       plot_boxplots,
                       plot_histogram,
                       plot_frequency_density,
                       plot_grouped_barplot)
+    
+    from .utils import(format_notebook)
                       
 
 except ImportError as e:
@@ -35,12 +42,19 @@ __all__ = ['load_dataset_from_zip',
            
            'check_existing_missing_values',
            'replace_missing_values',
-           'normalize_string_format',
+           'normalize_df_string_format',
+           'normalize_headers_string_format',
            'detect_implicit_duplicates',
            'replace_string_values_datetime',
+           'find_errors_to_numeric',
+           'convert_ndtype_to_numeric',
+           'convert_integer_to_boolean',
+           'standardize_gender_values',
            
            'missing_values_heatmap',
            'plot_boxplots',
            'plot_histogram',
            'plot_frequency_density',
-           'plot_grouped_barplot']
+           'plot_grouped_barplot',
+           
+           'format_notebook']
