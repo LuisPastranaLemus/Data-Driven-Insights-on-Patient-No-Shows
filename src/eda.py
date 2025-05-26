@@ -88,6 +88,49 @@ def plot_histogram(ds, bins=10, color='grey', title='', xlabel='', ylabel='Frequ
     plt.tight_layout()
     plt.show()
 
+# Plot_dual_histogram(ages_no_show, ages_showed_up, bins=18, color1='tomato',color2='mediumseagreen', title='Ages Distribution - Show vs No show', xlabel='Age',
+#                     xlabel='Age', ylabel='Patients amount', label1='No Show', label2='Show', xticks_range=(0, 1500, 50), yticks_range=(0, 80, 8))
+def plot_dual_histogram(ds1, ds2, bins=10, color1='black', color2='grey', title='Histogram comparison', xlabel='', ylabel='', 
+                        label1='', label2='', xticks_range=None, yticks_range=None, rotation=0):
+
+    # Make sure no mising values exists
+    ds1 = ds1.dropna()
+    ds2 = ds2.dropna()
+    
+    # Media and Mean calculation
+    mean1_val = ds1.mean()
+    median1_val = ds1.median()
+    mean2_val = ds1.mean()
+    median2_val = ds1.median()
+
+    plt.figure(figsize=(15, 7))
+    sns.histplot(ds1, bins=bins, edgecolor='black', kde=False, color=color1, label=label1, alpha=0.6)
+    sns.histplot(ds2, bins=bins, edgecolor='black', kde=False, color=color2, label=label2, alpha=0.4)
+    
+    # Mean line
+    plt.axvline(mean1_val, color='red', linestyle='dashed', linewidth=1.5, label=f'Mean: {mean1_val:.2f}')
+    plt.axvline(mean2_val, color='darkred', linestyle='dashed', linewidth=1.5, label=f'Mean: {mean2_val:.2f}')
+    # Median Line
+    plt.axvline(median1_val, color='blue', linestyle='dashdot', linewidth=1.5, label=f'Median: {median1_val:.2f}')
+    plt.axvline(median2_val, color='darkblue', linestyle='dashdot', linewidth=1.5, label=f'Median: {median2_val:.2f}')
+    
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    
+    if xticks_range is not None:
+        plt.xlim(xticks_range[0], xticks_range[1])
+    if yticks_range is not None:
+        plt.ylim(yticks_range[0], yticks_range[1])
+    
+    plt.xticks(np.arange(*xticks_range), rotation=rotation)
+    plt.yticks(np.arange(*yticks_range), rotation=rotation)
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
 # Plot a Frequency Density graph
 # plot_frequency_density(ds=series1, bins=np.arange(0, 1200, 50), color='grey', title='Frequency density', xlabel='Duration(minutes)',
 #                        ylabel='Density', xticks_range=(0, 1200, 100), show_kde=True)
@@ -128,7 +171,7 @@ def plot_frequency_density(ds, bins=10, color='grey', title='', xlabel='', ylabe
 # plot_grouped_barplot(data=dataframe, x_col='month', y_col='median_duration', hue_col='plan', palette=['black', 'grey'], 
 #                      title='Average Call', xlabel='Month', ylabel='Average Call Duration (min)', xticks_range=range(0, 13, 1),
 #                      yticks_range=range(0, 500, 50), rotation=65)
-def plot_grouped_barplot(df, x_col, y_col, hue_col=None, palette=['black', 'grey'], title='', xlabel='', ylabel='', xticks_range=None, 
+def plot_grouped_barplot(ds, x_col, y_col, hue_col=None, palette=['black', 'grey'], title='', xlabel='', ylabel='', xticks_range=None, 
                          yticks_range=None, rotation=0):
 
     plt.figure(figsize=(15, 7))
@@ -140,12 +183,11 @@ def plot_grouped_barplot(df, x_col, y_col, hue_col=None, palette=['black', 'grey
     plt.ylabel(ylabel)
     
     if xticks_range is not None:
-        plt.xticks(range(xticks_range), rotation=rotation)
+        plt.xticks(np.arange(*xticks_range), rotation=rotation)
     if yticks_range is not None:
-        plt.yticks(range(yticks_range), rotation=rotation)
+        plt.yticks(np.arange(*yticks_range), rotation=rotation)
 
-    if show_grid:
-        plt.grid(True, axis='y', linestyle='--', linewidth=0.5)
+    plt.grid(True)
 
     plt.tight_layout()
     plt.show()
