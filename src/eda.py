@@ -17,7 +17,7 @@ def missing_values_heatmap(df):
     plt.show()
 
 # Plot a graph for "N" Boxplots one next to the other
-# plot_multiple_boxplots_vertical(ds_list=[serie1, serie2, serie3], xlabels=['A', 'B', 'C'], ylabel='Valores',
+# plot_boxplots_vertical(ds_list=[serie1, serie2, serie3], xlabels=['A', 'B', 'C'], ylabel='Valores',
 #                                 title='Title', color=['red', 'green', 'blue'])
 def plot_boxplots(ds_list, xlabels, ylabel, title, yticks_range=None, rotation=0, color='grey'):
   
@@ -85,6 +85,19 @@ def plot_histogram(ds, bins=10, color='grey', title='', xlabel='', ylabel='Frequ
     plt.legend()
     plt.grid(True)
 
+    plt.tight_layout()
+    plt.show()
+
+def plot_hue_histogram(df, x_col='', hue_col='', bins=30, title='', xlabel='', ylabel='', legend_title ='', legend_labels=[]):
+
+    plt.figure(figsize=(15, 7))
+    sns.histplot(data=df, x=x_col, hue=hue_col, multiple='stack', bins=bins)
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.legend(title=legend_title, labels=legend_labels)
+    
+    plt.grid(True)
     plt.tight_layout()
     plt.show()
 
